@@ -10,10 +10,12 @@ from signal import SIGPIPE
 from signal import signal
 
 import click
+from asserttool import ic
 from clicktool import click_add_options
 from clicktool import click_global_options
-from clicktool import tv
+from clicktool import tvicgvd
 from epprint import epprint
+from globalverbose import gvd
 from unmp import unmp
 
 signal(SIGPIPE, SIG_DFL)
@@ -35,18 +37,19 @@ signal(SIGPIPE, SIG_DFL)
 def cli(
     ctx,
     buffer_size: int,
-    verbose: bool | int | float,
     verbose_inf: bool,
     dict_output: bool,
     strict_map_key: bool,
+    verbose: bool = False,
 ) -> None:
-
     assert not dict_output
 
-    tty, verbose = tv(
+    tty, verbose = tvicgvd(
         ctx=ctx,
         verbose=verbose,
         verbose_inf=verbose_inf,
+        ic=ic,
+        gvd=gvd,
     )
 
     unpacker = unmp(
