@@ -73,5 +73,8 @@ def cli(
         elif isinstance(value, float):
             sys.stdout.write(str(value) + "\n")
             sys.stdout.flush()
+        elif isinstance(value, tuple):
+            sys.stdout.write(str(value) + "\n")
+            sys.stdout.flush()
         else:
             raise NotImplementedError(type(value))
